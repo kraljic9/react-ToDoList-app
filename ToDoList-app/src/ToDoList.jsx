@@ -4,9 +4,15 @@ function ToDoList() {
   const [tasks, setTasks] = useState(["Take shower", "Read book", "Excercise"]);
   const [newTask, setNewTask] = useState("");
 
-  function addTaks() {}
+  function addTaks(e) {
+    let newTask = e.target.value;
 
-  function removeTask(index) {}
+    setTasks((prevTasks) => [...prevTasks, newTask]);
+  }
+
+  function removeTask(index) {
+    setTasks(tasks.filter((task, i) => i !== index));
+  }
 
   function moveUp(index) {}
 
@@ -16,6 +22,9 @@ function ToDoList() {
     <>
       <div className="todolist-container">
         <h1>ToDoList app</h1>
+
+        <input type="text" className="taskInput" value={newTask} />
+        <button onClick={addTaks}>Add task</button>
 
         <ol>
           {tasks.map((task, index) => (
@@ -33,9 +42,6 @@ function ToDoList() {
             </li>
           ))}
         </ol>
-
-        <input type="text" className="taskInput" value={newTask} />
-        <button onClick={addTaks}>Add task</button>
       </div>
     </>
   );
