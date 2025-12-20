@@ -4,26 +4,41 @@ function ToDoList() {
   const [tasks, setTasks] = useState(["Take shower", "Read book", "Excercise"]);
   const [newTask, setNewTask] = useState("");
 
-  function addTaks(e) {
-    let newTask = e.target.value;
+  function addTaks() {
+    let addedTask = newTask;
 
-    setTasks((prevTasks) => [...prevTasks, newTask]);
+    if (addedTask.trim().length !== 0) {
+      setTasks((prevTasks) => [...prevTasks, addedTask]);
+    }
   }
 
   function removeTask(index) {
     setTasks(tasks.filter((task, i) => i !== index));
   }
 
-  function moveUp(index) {}
+  function moveUp(index) {
+    if (index > 0) {
+      [tasks[index], tasks[index + 1]] = [tasks[index + 1], tasks[index]];
+    }
+  }
 
-  function moveDown(index) {}
+  function moveDown(index) {
+    if (index < tasks.length - 1) {
+      [tasks[index], tasks[index - 1]] = [tasks[index - 1], tasks[index]];
+    }
+  }
 
   return (
     <>
       <div className="todolist-container">
         <h1>ToDoList app</h1>
 
-        <input type="text" className="taskInput" value={newTask} />
+        <input
+          type="text"
+          className="taskInput"
+          value={newTask}
+          onChange={(e) => setNewTask(e.target.value)}
+        />
         <button onClick={addTaks}>Add task</button>
 
         <ol>
