@@ -5,10 +5,9 @@ function ToDoList() {
   const [newTask, setNewTask] = useState("");
 
   function addTaks() {
-    let addedTask = newTask;
-
-    if (addedTask.trim().length !== 0) {
-      setTasks((prevTasks) => [...prevTasks, addedTask]);
+    if (newTask.trim().length !== 0) {
+      setTasks((prevTasks) => [...prevTasks, newTask]);
+      setNewTask("");
     }
   }
 
@@ -17,14 +16,26 @@ function ToDoList() {
   }
 
   function moveUp(index) {
+    const updatedTask = [...tasks];
+
     if (index > 0) {
-      [tasks[index], tasks[index + 1]] = [tasks[index + 1], tasks[index]];
+      [updatedTask[index], updatedTask[index - 1]] = [
+        updatedTask[index - 1],
+        updatedTask[index],
+      ];
+      setTasks(updatedTask);
     }
   }
 
   function moveDown(index) {
+    const updatedTask = [...tasks];
+
     if (index < tasks.length - 1) {
-      [tasks[index], tasks[index - 1]] = [tasks[index - 1], tasks[index]];
+      [updatedTask[index], updatedTask[index + 1]] = [
+        updatedTask[index + 1],
+        updatedTask[index],
+      ];
+      setTasks(updatedTask);
     }
   }
 
