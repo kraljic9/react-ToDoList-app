@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 function ToDoList() {
-  const [tasks, setTasks] = useState(["Take shower", "Read book", "Excercise"]);
+  const [tasks, setTasks] = useState([]);
   const [newTask, setNewTask] = useState("");
 
   function addTaks() {
@@ -44,17 +44,20 @@ function ToDoList() {
       <div className="todolist-container">
         <h1>ToDoList app</h1>
 
-        <input
-          type="text"
-          className="taskInput"
-          value={newTask}
-          onChange={(e) => setNewTask(e.target.value)}
-        />
-        <button onClick={addTaks}>Add task</button>
-
-        <ol>
+        <div className="add-task-container">
+          <input
+            type="text"
+            className="taskInput"
+            value={newTask}
+            onChange={(e) => setNewTask(e.target.value)}
+          />
+          <button className="add-btn" onClick={addTaks}>
+            Add task
+          </button>
+        </div>
+        <ul className="to-do-list">
           {tasks.map((task, index) => (
-            <li key={index}>
+            <li key={index} className="to-do-list-item">
               <span className="text">{task}</span>
               <button className="remove-btn" onClick={() => removeTask(index)}>
                 Remove
@@ -67,7 +70,7 @@ function ToDoList() {
               </button>
             </li>
           ))}
-        </ol>
+        </ul>
       </div>
     </>
   );
