@@ -2,7 +2,7 @@
 Add todos OK!
 Toggle complete OK!
 Delete todo OK!
-Edit todo
+Edit todo OK!
 Filter: All / Completed / Active 
 Show count of remaining todos 
 */
@@ -19,6 +19,7 @@ function ToDoList() {
   const [newTodo, setNewTodo] = useState("");
   const [editText, setEditText] = useState("");
   const [editId, setEditId] = useState(null);
+  const [listFilter, setListFilter] = useState("all");
 
   function addTaks() {
     setToDoList((prev) => [
@@ -55,6 +56,18 @@ function ToDoList() {
     setEditText("");
   }
 
+  let filteredList = toDoList.filter((todo) => {
+    if (listFilter === "completed") return todo.completed;
+    if (listFilter === "active") return !todo.completed;
+    return true;
+  });
+
+  let taskAmmount = toDoList.filter((task) => task.completed === false).length;
+
+  let taskLabel = taskAmmount === 1 ? "task" : "tasks";
+
+  let verb = taskAmmount === 1 ? "is" : "are";
+
   return (
     <>
       <div className="todolist-container">
@@ -70,9 +83,12 @@ function ToDoList() {
           <button className="add-btn" onClick={addTaks}>
             Add task
           </button>
+          <p className="task-ammount-label">
+            There {verb} {taskAmmount} {taskLabel} remaining
+          </p>
         </div>
         <ul className="to-do-list">
-          {toDoList.map((task) => (
+          {filteredList.map((task) => (
             <li
               key={task.id}
               className="to-do-list-item"
@@ -124,6 +140,26 @@ function ToDoList() {
             </li>
           ))}
         </ul>
+      </div>
+      <div className="display-buttons">
+        <button
+          className="btn-display-all btn-display"
+          onClick={() => setListFilter("all")}
+        >
+          Display All
+        </button>
+        <button
+          className="btn-display-completed btn-display"
+          onClick={() => setListFilter("completed")}
+        >
+          Display Completed
+        </button>
+        <button
+          className="btn-display-active btn-display"
+          onClick={() => setListFilter("active")}
+        >
+          Display Active
+        </button>
       </div>
     </>
   );

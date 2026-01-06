@@ -22,6 +22,12 @@ h1 {
   font-size: 3rem;
 }
 
+.task-ammount-label {
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin: 20px;
+}
+
 button {
   font-weight: bold;
   border-radius: 4px;
@@ -128,4 +134,29 @@ button {
 
 .save-btn:hover {
   background-color: hsl(210, 100%, 36%);
+}
+
+.display-buttons {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translate(-50%);
+  display: flex;
+  gap: 20px;
+}
+
+.btn-display {
+  padding: 8px 12px;
+  font-size: 1.3rem;
+  background-color: hsl(0, 0%, 40%);
+}
+
+.btn-display-all:hover {
+  background-color: hsl(0, 0%, 30%);
+}
+.btn-display-completed:hover {
+  background-color: hsl(0, 0%, 30%);
+}
+.btn-display-active:hover {
+  background-color: hsl(0, 0%, 30%);
 }
