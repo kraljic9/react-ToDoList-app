@@ -14,17 +14,20 @@ function ToDoList() {
     { id: 2, text: "Medidate", completed: false },
     { id: 3, text: "Go to work", completed: false },
   ]);
-  const [newTask, setNewTask] = useState("");
+
+  const [newTodo, setNewTodo] = useState("");
 
   function addTaks() {
-    if (newTask.trim().length !== 0) {
-      setToDoList((prevTasks) => [...prevTasks, newTask]);
-      setNewTask("");
-    }
+    setToDoList((prev) => [
+      ...prev,
+      { id: Date.now(), text: newTodo, completed: false },
+    ]);
+
+    setNewTodo("");
   }
 
   function removeTask(index) {
-    setToDoList(toDoList.filter((task, i) => i !== index));
+    setToDoList(toDoList.filter((_, i) => i !== index));
   }
 
   function moveUp(index) {
@@ -60,24 +63,27 @@ function ToDoList() {
           <input
             type="text"
             className="taskInput"
-            value={newTask}
-            onChange={(e) => setNewTask(e.target.value)}
+            value={newTodo}
+            onChange={(e) => setNewTodo(e.target.value)}
           />
           <button className="add-btn" onClick={addTaks}>
             Add task
           </button>
         </div>
         <ul className="to-do-list">
-          {toDoList.map((task, index) => (
-            <li key={index} className="to-do-list-item">
-              <span className="text">{task}</span>
-              <button className="remove-btn" onClick={() => removeTask(index)}>
+          {toDoList.map((task) => (
+            <li key={task.id} className="to-do-list-item">
+              <span className="text">{task.text}</span>
+              <button
+                className="remove-btn"
+                onClick={() => removeTask(task.id)}
+              >
                 Remove
               </button>
-              <button className="move-btn" onClick={() => moveUp(index)}>
+              <button className="move-btn" onClick={() => moveUp(task.id)}>
                 ☝️
               </button>
-              <button className="move-btn" onClick={() => moveDown(index)}>
+              <button className="move-btn" onClick={() => moveDown(task.id)}>
                 👇
               </button>
             </li>
