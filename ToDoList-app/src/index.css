@@ -109,6 +109,10 @@ button {
   background-color: hsl(0, 0%, 30%);
 }
 
+.completed {
+  background-color: hsl(120, 47%, 54%);
+}
+
 .edit-task-btn {
   background-color: hsl(210, 100%, 46%);
   margin-right: 10px;

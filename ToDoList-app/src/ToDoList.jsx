@@ -83,12 +83,9 @@ function ToDoList() {
           {filteredList.map((task) => (
             <li
               key={task.id}
-              className="to-do-list-item"
-              style={{
-                backgroundColor: !task.completed
-                  ? "hsl(0, 0%, 85%)"
-                  : "hsl(120, 47%, 54%)",
-              }}
+              className={`to-do-list-item ${
+                task.completed ? "completed" : ""
+              } `}
             >
               {editId === task.id ? (
                 <>
