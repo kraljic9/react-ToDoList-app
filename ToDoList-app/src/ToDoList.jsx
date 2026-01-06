@@ -12,7 +12,7 @@ function ToDoList() {
   const [editId, setEditId] = useState(null);
   const [listFilter, setListFilter] = useState("all");
 
-  function addTaks() {
+  function addTask() {
     setToDoList((prev) => [
       ...prev,
       { id: Date.now(), text: newTodo, completed: false },
@@ -71,7 +71,7 @@ function ToDoList() {
             value={newTodo}
             onChange={(e) => setNewTodo(e.target.value)}
           />
-          <button className="add-btn" onClick={addTaks}>
+          <button className="add-btn" onClick={addTask}>
             Add task
           </button>
           <p className="task-ammount-label">
