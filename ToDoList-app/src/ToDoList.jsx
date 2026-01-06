@@ -1,12 +1,3 @@
-/* 
-Add todos OK!
-Toggle complete OK!
-Delete todo OK!
-Edit todo OK!
-Filter: All / Completed / Active 
-Show count of remaining todos 
-*/
-
 import { useState } from "react";
 
 function ToDoList() {
@@ -30,8 +21,8 @@ function ToDoList() {
     setNewTodo("");
   }
 
-  function removeTask(index) {
-    setToDoList(toDoList.filter((_, i) => i !== index));
+  function removeTask(id) {
+    setToDoList(toDoList.filter((task) => task.id !== id));
   }
 
   function toggleComplete(id) {
