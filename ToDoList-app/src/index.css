@@ -54,6 +54,7 @@ button {
   align-items: center;
   background-color: hsl(0, 0%, 85%);
   border-radius: 4px;
+  transition: background-color 0.4s ease;
 }
 
 .text {
@@ -90,4 +91,14 @@ button {
 
 .move-btn:hover {
   background-color: hsl(210, 100%, 46%);
+}
+
+.toggle-complete-btn {
+  margin-right: 10px;
+  padding: 8px 12px;
+  background-color: hsl(0, 0%, 40%);
+}
+
+.toggle-complete-btn:hover {
+  background-color: hsl(0, 0%, 30%);
 }

@@ -1,5 +1,5 @@
 /* 
-Add todos 
+Add todos OK!
 Toggle complete 
 Delete todo 
 Edit todo Filter: All / Completed / Active 
@@ -54,6 +54,16 @@ function ToDoList() {
     }
   }
 
+  function toggleComplete(id) {
+    setToDoList(
+      toDoList.map((task) =>
+        task.id === id ? { ...task, completed: !task.completed } : task
+      )
+    );
+  }
+
+  console.log(toDoList);
+
   return (
     <>
       <div className="todolist-container">
@@ -72,7 +82,15 @@ function ToDoList() {
         </div>
         <ul className="to-do-list">
           {toDoList.map((task) => (
-            <li key={task.id} className="to-do-list-item">
+            <li
+              key={task.id}
+              className="to-do-list-item"
+              style={{
+                backgroundColor: !task.completed
+                  ? "hsl(0, 0%, 85%)"
+                  : "hsl(120, 47%, 54%)",
+              }}
+            >
               <span className="text">{task.text}</span>
               <button
                 className="remove-btn"
@@ -85,6 +103,13 @@ function ToDoList() {
               </button>
               <button className="move-btn" onClick={() => moveDown(task.id)}>
                 👇
+              </button>
+
+              <button
+                className="toggle-complete-btn"
+                onClick={() => toggleComplete(task.id)}
+              >
+                Toggle Complete
               </button>
             </li>
           ))}
