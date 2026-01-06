@@ -1,41 +1,53 @@
+/* 
+Add todos 
+Toggle complete 
+Delete todo 
+Edit todo Filter: All / Completed / Active 
+Show count of remaining todos 
+*/
+
 import { useState } from "react";
 
 function ToDoList() {
-  const [tasks, setTasks] = useState([]);
+  const [toDoList, setToDoList] = useState([
+    { id: 1, text: "Jogging", completed: false },
+    { id: 2, text: "Medidate", completed: false },
+    { id: 3, text: "Go to work", completed: false },
+  ]);
   const [newTask, setNewTask] = useState("");
 
   function addTaks() {
     if (newTask.trim().length !== 0) {
-      setTasks((prevTasks) => [...prevTasks, newTask]);
+      setToDoList((prevTasks) => [...prevTasks, newTask]);
       setNewTask("");
     }
   }
 
   function removeTask(index) {
-    setTasks(tasks.filter((task, i) => i !== index));
+    setToDoList(toDoList.filter((task, i) => i !== index));
   }
 
   function moveUp(index) {
-    const updatedTask = [...tasks];
+    const updatedTask = [...toDoList];
 
     if (index > 0) {
       [updatedTask[index], updatedTask[index - 1]] = [
         updatedTask[index - 1],
         updatedTask[index],
       ];
-      setTasks(updatedTask);
+      setToDoList(updatedTask);
     }
   }
 
   function moveDown(index) {
-    const updatedTask = [...tasks];
+    const updatedTask = [...toDoList];
 
-    if (index < tasks.length - 1) {
+    if (index < toDoList.length - 1) {
       [updatedTask[index], updatedTask[index + 1]] = [
         updatedTask[index + 1],
         updatedTask[index],
       ];
-      setTasks(updatedTask);
+      setToDoList(updatedTask);
     }
   }
 
@@ -56,7 +68,7 @@ function ToDoList() {
           </button>
         </div>
         <ul className="to-do-list">
-          {tasks.map((task, index) => (
+          {toDoList.map((task, index) => (
             <li key={index} className="to-do-list-item">
               <span className="text">{task}</span>
               <button className="remove-btn" onClick={() => removeTask(index)}>
