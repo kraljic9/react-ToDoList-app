@@ -102,3 +102,30 @@ button {
 .toggle-complete-btn:hover {
   background-color: hsl(0, 0%, 30%);
 }
+
+.edit-task-btn {
+  background-color: hsl(210, 100%, 46%);
+  margin-right: 10px;
+  padding: 8px 12px;
+}
+
+.edit-task-btn:hover {
+  background-color: hsl(210, 100%, 36%);
+}
+
+.edit-input {
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 1.3rem;
+}
+
+.save-btn {
+  background-color: hsl(210, 100%, 46%);
+
+  padding: 8px 12px;
+  margin-left: 12px;
+}
+
+.save-btn:hover {
+  background-color: hsl(210, 100%, 36%);
+}
