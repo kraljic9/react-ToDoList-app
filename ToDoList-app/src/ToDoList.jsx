@@ -1,8 +1,9 @@
 /* 
 Add todos OK!
-Toggle complete 
-Delete todo 
-Edit todo Filter: All / Completed / Active 
+Toggle complete OK!
+Delete todo OK!
+Edit todo
+Filter: All / Completed / Active 
 Show count of remaining todos 
 */
 
@@ -16,6 +17,8 @@ function ToDoList() {
   ]);
 
   const [newTodo, setNewTodo] = useState("");
+  const [editText, setEditText] = useState("");
+  const [editId, setEditId] = useState(null);
 
   function addTaks() {
     setToDoList((prev) => [
@@ -30,30 +33,6 @@ function ToDoList() {
     setToDoList(toDoList.filter((_, i) => i !== index));
   }
 
-  function moveUp(index) {
-    const updatedTask = [...toDoList];
-
-    if (index > 0) {
-      [updatedTask[index], updatedTask[index - 1]] = [
-        updatedTask[index - 1],
-        updatedTask[index],
-      ];
-      setToDoList(updatedTask);
-    }
-  }
-
-  function moveDown(index) {
-    const updatedTask = [...toDoList];
-
-    if (index < toDoList.length - 1) {
-      [updatedTask[index], updatedTask[index + 1]] = [
-        updatedTask[index + 1],
-        updatedTask[index],
-      ];
-      setToDoList(updatedTask);
-    }
-  }
-
   function toggleComplete(id) {
     setToDoList(
       toDoList.map((task) =>
@@ -62,7 +41,19 @@ function ToDoList() {
     );
   }
 
-  console.log(toDoList);
+  function startEdit(task) {
+    setEditId(task.id);
+    setEditText(task.text);
+  }
+
+  function saveChange(id) {
+    setToDoList((prev) =>
+      prev.map((task) => (task.id === id ? { ...task, text: editText } : task))
+    );
+
+    setEditId(null);
+    setEditText("");
+  }
 
   return (
     <>
@@ -91,26 +82,45 @@ function ToDoList() {
                   : "hsl(120, 47%, 54%)",
               }}
             >
-              <span className="text">{task.text}</span>
-              <button
-                className="remove-btn"
-                onClick={() => removeTask(task.id)}
-              >
-                Remove
-              </button>
-              <button className="move-btn" onClick={() => moveUp(task.id)}>
-                ☝️
-              </button>
-              <button className="move-btn" onClick={() => moveDown(task.id)}>
-                👇
-              </button>
+              {editId === task.id ? (
+                <>
+                  <input
+                    type="text"
+                    value={editText}
+                    onChange={(e) => setEditText(e.target.value)}
+                    className="edit-input"
+                  />
+                  <button
+                    className="save-btn"
+                    onClick={() => saveChange(task.id)}
+                  >
+                    Save Change
+                  </button>
+                </>
+              ) : (
+                <>
+                  <span className="text">{task.text}</span>
+                  <button
+                    className="edit-task-btn"
+                    onClick={() => startEdit(task)}
+                  >
+                    Edit Task
+                  </button>
+                  <button
+                    className="remove-btn"
+                    onClick={() => removeTask(task.id)}
+                  >
+                    Remove
+                  </button>
 
-              <button
-                className="toggle-complete-btn"
-                onClick={() => toggleComplete(task.id)}
-              >
-                Toggle Complete
-              </button>
+                  <button
+                    className="toggle-complete-btn"
+                    onClick={() => toggleComplete(task.id)}
+                  >
+                    Toggle Complete
+                  </button>
+                </>
+              )}
             </li>
           ))}
         </ul>
@@ -120,3 +130,39 @@ function ToDoList() {
 }
 
 export default ToDoList;
+
+/*
+   <button className="move-btn" onClick={() => moveUp(task.id)}>
+                    ☝️
+                  </button>
+                  <button
+                    className="move-btn"
+                    onClick={() => moveDown(task.id)}
+                  >
+                    👇
+                  </button>
+
+                  function moveUp(index) {
+    const updatedTask = [...toDoList];
+
+    if (index > 0) {
+      [updatedTask[index], updatedTask[index - 1]] = [
+        updatedTask[index - 1],
+        updatedTask[index],
+      ];
+      setToDoList(updatedTask);
+    }
+  }
+
+  function moveDown(index) {
+    const updatedTask = [...toDoList];
+
+    if (index < toDoList.length - 1) {
+      [updatedTask[index], updatedTask[index + 1]] = [
+        updatedTask[index + 1],
+        updatedTask[index],
+      ];
+      setToDoList(updatedTask);
+    }
+  }
+*/
