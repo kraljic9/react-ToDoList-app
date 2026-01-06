@@ -13,6 +13,7 @@ function ToDoList() {
   const [listFilter, setListFilter] = useState("all");
 
   function addTask() {
+    if (!newTodo.trim()) return;
     setToDoList((prev) => [
       ...prev,
       { id: Date.now(), text: newTodo, completed: false },
